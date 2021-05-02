@@ -8,6 +8,6 @@
   <title>PHP JOURNEY</title>
 </head>
 <body>
-  <?php include "includes/loops.php" ?>
+  <?php include "includes/arrays.php" ?>
 </body>
 </html>
