@@ -8,6 +8,6 @@
   <title>PHP JOURNEY</title>
 </head>
 <body>
-  <?php include "includes/random_numbers.php" ?>
+  <?php include "includes/loops.php" ?>
 </body>
 </html>
