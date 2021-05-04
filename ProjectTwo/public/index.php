@@ -5,9 +5,15 @@
       PDO::ATTR_ERRMODE,
       PDO::ERRMODE_EXCEPTION
     );
-    $output = 'Connected to the database.';
+    $output = 'Connected to the database.<br>';
+    $sql = 'SELECT joketext FROM ijdb.joke';
+    $result = $pdo->query($sql);
+    while($row = $result->fetch()) {
+      $jokes[] = $row['joketext'];
+    }
+    // var_dump($jokes);
   } catch (PDOException $e) {
-    $output = 'Unable to connect to the database: ' . $e->getMessage() . ' in ' . $e->getFile() . ' line: ' . $e->getLine();
+    $error = 'Unable to connect to the database: ' . $e->getMessage() . ' in ' . $e->getFile() . ' line: ' . $e->getLine();
   }
-  include __DIR__ . '/../templates/output.html.php';
+  include __DIR__ . '/../templates/jokes.html.php';
 ?>
