@@ -1,6 +1,7 @@
 <?php
   try {
     include __DIR__ . '/../includes/DatabaseConnection.php';
+    include __DIR__ . '/../includes/DatabaseFunctions.php';
 
     $sql = 'SELECT j.id, joketext, a.name, a.email
             FROM joke AS j
@@ -9,6 +10,8 @@
     $jokes = $pdo->query($sql);
 
     $title = 'Jokes List';
+
+    $totalJokes = totalJokes($pdo);
 
     // Start the buffer
     ob_start();
