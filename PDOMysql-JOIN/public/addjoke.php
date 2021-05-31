@@ -1,14 +1,8 @@
 <?php
   if (isset($_POST['joketext'])) {
     try {
-      $pdo = new PDO('mysql:host=localhost;dbname=ijdb;charset=utf8', 'Mauro', 'bnoRRT50');
+      include __DIR__ . '/../includes/DatabaseConnection.php';
 
-      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-      // SQL QUERY FROM THE BOOK
-      // $sql = 'INSERT INTO joke SET joketext = :joketext, jokedate = CURDATE()';
-
-      // STANDARD SQL QUERY
       $sql = 'INSERT INTO joke (joketext, jokedate) VALUES (:joketext, CURDATE())';
 
       $stmt = $pdo->prepare($sql);

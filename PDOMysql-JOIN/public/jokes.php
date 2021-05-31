@@ -1,8 +1,7 @@
 <?php
   try {
-    $pdo = new PDO('mysql:host=localhost;dbname=ijdb;charset=utf8', 'Mauro', 'bnoRRT50');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // $sql = 'SELECT id, joketext FROM ijdb.joke';
+    include __DIR__ . '/../includes/DatabaseConnection.php';
+
     $sql = 'SELECT j.id, joketext, a.name, a.email
             FROM joke AS j
             INNER JOIN author AS a
