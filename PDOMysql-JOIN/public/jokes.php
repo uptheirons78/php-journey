@@ -3,11 +3,7 @@
     include __DIR__ . '/../includes/DatabaseConnection.php';
     include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-    $sql = 'SELECT j.id, joketext, a.name, a.email
-            FROM joke AS j
-            INNER JOIN author AS a
-            ON j.authorid = a.id';
-    $jokes = $pdo->query($sql);
+    $jokes = allJokes($pdo);
 
     $title = 'Jokes List';
 
