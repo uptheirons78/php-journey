@@ -6,7 +6,16 @@ try {
   if (isset($_POST['joketext'])) {
     // updateJoke($pdo, $_POST['jokeid'], $_POST['joketext'], 1);
 
-    updateJoke($pdo, array(
+    // updateJoke($pdo, array(
+    //   'id' => $_POST['jokeid'],
+    //   'joketext' => $_POST['joketext'],
+    //   'authorId' => 1
+    // ));
+
+    /**
+     * Use generic update() function
+     */
+    update($pdo, 'joke', 'id', array(
       'id' => $_POST['jokeid'],
       'joketext' => $_POST['joketext'],
       'authorId' => 1
@@ -14,8 +23,12 @@ try {
 
     header('location: jokes.php');
   } else {
-    $joke = getJoke($pdo, $_GET['id']);
+    // $joke = getJoke($pdo, $_GET['id']);
 
+    /**
+     * Use the generic getJoke() function
+     */
+    $joke = findById($pdo, 'joke', 'id', $_GET['id']);
     $title = 'Edit joke';
 
     ob_start();

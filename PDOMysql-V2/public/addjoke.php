@@ -4,11 +4,20 @@
       include __DIR__ . '/../includes/DatabaseConnection.php';
       include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-      insertJoke($pdo, [
+      // insertJoke($pdo, [
+      //   'authorId' => 1,
+      //   'jokeText' => $_POST['joketext'],
+      //   'jokedate' => new DateTime()
+      // ]);
+
+      /**
+       * Use the generic insert() function
+       *  */
+      insert($pdo, 'joke', array(
         'authorId' => 1,
         'jokeText' => $_POST['joketext'],
         'jokedate' => new DateTime()
-      ]);
+      ));
 
       header('location: jokes.php');
 

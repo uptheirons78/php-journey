@@ -3,11 +3,35 @@
     include __DIR__ . '/../includes/DatabaseConnection.php';
     include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-    $jokes = allJokes($pdo);
+    // $jokes = allJokes($pdo);
+
+    /**
+     * Use a combination of findAll() and findById()
+     * generic function
+     */
+    $result = findAll($pdo, 'joke');
+    $jokes = [];
+    foreach ($result as $joke) {
+      $author = findById($pdo, 'author', 'id', $joke['authorid']);
+
+      $jokes[] = [
+        'id' => $joke['id'],
+        'joketext' => $joke['joketext'],
+        'jokedate' => $joke['jokedate'],
+        'name' => $author['name'],
+        'email' => $author['email']
+      ];
+    }
 
     $title = 'Jokes List';
 
-    $totalJokes = totalJokes($pdo);
+    // $totalJokes = totalJokes($pdo);
+
+    /**
+     * Use the generic total() function
+     *
+    */
+    $totalJokes = total($pdo, 'joke');
 
     // Start the buffer
     ob_start();

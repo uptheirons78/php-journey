@@ -99,3 +99,116 @@ function processDates($fields) {
   }
   return $fields;
 }
+
+function allAuthors($pdo) {
+  $query = 'SELECT * FROM `author`';
+  $authors = query($pdo, $query);
+  return $authors->fetchAll();
+}
+
+function deleteAuthor($pdo, $id) {
+  $paramenters = [':id' => $id];
+  $query = 'DELETE FROM `author` WHERE `id` = :id';
+  query($pdo, $query, $paramenters);
+}
+
+function insertAuthor($pdo, $fields) {
+  $query = 'INSERT INTO `author` (';
+
+  foreach($fields as $key => $value) {
+    $query .= '`' . $key . '`,';
+  }
+
+  $query = rtrim($query, ',');
+
+  $query .= ') VALUES (';
+
+  foreach($fields as $key => $value) {
+    $query .= ':' . $key . ',';
+  }
+
+  $query = rtrim($query, ',');
+
+  $query .= ')';
+
+  $fields = processDates($fields);
+
+  query($pdo, $query, $fields);
+
+}
+
+/**
+ * Generic functions
+ */
+
+function findAll($pdo, $table) {
+  $query = 'SELECT * FROM `' . $table . '`';
+  $result = query($pdo, $query);
+  return $result->fetchAll();
+}
+
+function delete($pdo, $table, $primaryKey, $id) {
+  $paramenters = [':id' => $id];
+  $query = 'DELETE FROM `' . $table . '` WHERE `' . $primaryKey .'` = :id';
+  query($pdo, $query, $paramenters);
+}
+
+function insert($pdo, $table, $fields) {
+  $query = 'INSERT INTO `' . $table . '` (';
+
+  foreach ($fields as $key => $value) {
+    $query .= '`' . $key . '`,';
+  }
+
+  $query = rtrim($query, ',');
+
+  $query .= ') VALUES (';
+
+
+  foreach ($fields as $key => $value) {
+    $query .= ':' . $key . ',';
+  }
+
+  $query = rtrim($query, ',');
+
+  $query .= ')';
+
+  $fields = processDates($fields);
+
+  query($pdo, $query, $fields);
+}
+
+function update($pdo, $table, $primaryKey, $fields) {
+
+  $query = ' UPDATE `' . $table . '` SET ';
+
+  foreach ($fields as $key => $value) {
+    $query .= '`' . $key . '` = :' . $key . ',';
+  }
+
+  $query = rtrim($query, ',');
+
+  $query .= ' WHERE `' . $primaryKey . '` = :primaryKey';
+
+  //Set the :primaryKey variable
+  $fields['primaryKey'] = $fields['id'];
+
+  $fields = processDates($fields);
+
+  query($pdo, $query, $fields);
+}
+
+function findById($pdo, $table, $primaryKey, $value) {
+  $query = 'SELECT * FROM `' . $table . '` WHERE `' . $primaryKey . '` = :value';
+  $parameters = ['value' => $value];
+  $result = query($pdo, $query, $parameters);
+  return $result->fetch();
+}
+
+function total($pdo, $table) {
+  $query = 'SELECT COUNT(*) FROM `' . $table . '`';
+  $result = query($pdo, $query);
+  $row = $result->fetch();
+  return $row[0];
+}
+

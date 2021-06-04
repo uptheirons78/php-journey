@@ -3,7 +3,12 @@
     include __DIR__ . '/../includes/DatabaseConnection.php';
     include __DIR__ . '/../includes/DatabaseFunctions.php';
 
-    deleteJoke($pdo, $_POST['id']);
+    // deleteJoke($pdo, $_POST['id']);
+
+    /**
+     * Use generic delete() function
+     */
+    delete($pdo, 'joke', 'id', $_POST['id']);
 
     header('location: jokes.php');
 
