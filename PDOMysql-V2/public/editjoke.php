@@ -3,32 +3,19 @@ include __DIR__ . '/../includes/DatabaseConnection.php';
 include __DIR__ . '/../includes/DatabaseFunctions.php';
 
 try {
-  if (isset($_POST['joketext'])) {
-    // updateJoke($pdo, $_POST['jokeid'], $_POST['joketext'], 1);
+  if (isset($_POST['joke'])) {
+    $joke = $_POST['joke'];
 
-    // updateJoke($pdo, array(
-    //   'id' => $_POST['jokeid'],
-    //   'joketext' => $_POST['joketext'],
-    //   'authorId' => 1
-    // ));
+    $joke['jokedate'] = new DateTime();
+    $joke['authorId'] = 1;
 
-    /**
-     * Use generic update() function
-     */
-    update($pdo, 'joke', 'id', array(
-      'id' => $_POST['jokeid'],
-      'joketext' => $_POST['joketext'],
-      'authorId' => 1
-    ));
+    save($pdo, 'joke', 'id', $joke);
 
     header('location: jokes.php');
   } else {
-    // $joke = getJoke($pdo, $_GET['id']);
-
-    /**
-     * Use the generic getJoke() function
-     */
-    $joke = findById($pdo, 'joke', 'id', $_GET['id']);
+    if (isset($_GET['id'])) {
+      $joke = findById($pdo, 'joke', 'id', $_GET['id']);
+    }
     $title = 'Edit joke';
 
     ob_start();

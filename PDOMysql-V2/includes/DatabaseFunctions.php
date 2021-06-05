@@ -212,3 +212,14 @@ function total($pdo, $table) {
   return $row[0];
 }
 
+function save($pdo, $table, $primaryKey, $record) {
+  try {
+    if($record[$primaryKey] == '') {
+      $record[$primaryKey] = null;
+    }
+    insert($pdo, $table, $record);
+  } catch (PDOException $e) {
+    update($pdo, $table, $primaryKey, $record);
+  }
+}
+
