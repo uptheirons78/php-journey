@@ -1,0 +1,45 @@
+# PHP BASICS
+
+1. PHP meaning ? PHP: Hypertext Prepocessor;
+2. File extension: .php;
+3. <?php  ?>;
+4. echo "Hello World";
+5. echo "<br>" (php can output any html tag);
+6. // single line comment, also #;
+7. /* */ multi lines comment;
+8. $variable (start with letter or _);
+9. data types:
+  a. string;
+  b. integer;
+  c. float;
+  d. boolean;
+  e. null;
+  f. array;
+  g. object;
+  h. resource;
+10. echo;
+11. "hello" . " world" (. is for concatenation);
+12. gettype();
+13. var_dump();
+14. is_string() - bool;
+15. is_bool() - bool;
+16. is_double() - bool;
+17. is_int() - bool;
+18. isset() - bool;
+19. constants - define('PI', 3.14) - echo PI;
+20. SORT_ASC;
+21. PHP_INT_MAX;
+22. nums: integer and float;
+23. operations: + - / * %;
+24. assignment with math operators: += , -=, *=, /=;
+25. increment operator: $a++ or ++$a;
+26. decrement operator: $a-- or --$a;
+27. is_float() - bool;
+28. is_double() - bool;
+29. is_int() - bool;
+30. is_numeric() - bool;
+  a. is_numeric("3.45") //true;
+  b. is_numeric("3gg.45") //false;
+31. string to number: (float)"12.34" or (int)"12.34";
+32. num functions: abs, pow, sqrt, max, min, round, floor, ceil;
+33. formatting: number_format;
