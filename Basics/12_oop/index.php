@@ -1,9 +1,19 @@
 <?php
 
-// What is class and instance
+require_once __DIR__ . '/Person.php';
+require_once __DIR__ . '/Student.php';
 
-// Create Person class in Person.php
+// $p = new Person('Steve', 'Harris');
+// $p->setAge(43);
+// $p2 = new Person('Bruce', 'Dickinson');
+// $p2->setAge(53);
+// var_dump($p);
+// echo '</pre>';
+// echo '<br>';
+// echo Person::$counter;
 
-// Create instance of Person
-
-// Using setter and getter
+$student = new Student('Mimmo', 'Mammo', '12345');
+$student->setAge(34);
+echo '<pre>';
+var_dump($student);
+echo '</pre>';
