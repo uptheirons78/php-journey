@@ -1,11 +1,20 @@
 <?php
-  $dsn = "mysql:host=localhost;port=80;dbname=products_crud;charset=utf8";
-  $pdo = new PDO($dsn, 'root', '');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$dsn = "mysql:host=localhost;port=80;dbname=products_crud;charset=utf8";
+$pdo = new PDO($dsn, 'root', '');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+$search = $_GET['search'] ?? '';
+
+if($search) {
+  $statement = $pdo->prepare('SELECT * FROM products WHERE title LIKE :title ORDER BY create_date DESC');
+  $statement->bindValue(':title', "%$search%");
+} else {
   $statement = $pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
-  $statement->execute();
-  $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$statement->execute();
+$products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!doctype html>
@@ -25,10 +34,23 @@
 </head>
 
 <body>
+  <!-- Page Title -->
   <h1>Products CRUD Application</h1>
+  <!-- Page Title End -->
+  <!-- Create Button -->
   <p>
     <a href="create.php" class="btn btn-success">Create Product</a>
   </p>
+  <!-- Create Button End -->
+  <!-- Quick Search -->
+  <form action="">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search for products" name="search" value="<?php echo $search; ?>">
+      <button class="input-group-text" type="submit">Search</button>
+    </div>
+  </form>
+  <!-- Quick Search End -->
+  <!-- Table -->
   <table class="table">
     <thead>
       <tr>
@@ -41,7 +63,7 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($products as $i => $product): ?>
+      <?php foreach ($products as $i => $product) : ?>
         <tr>
           <th scope="row"><?php echo $i + 1; ?></th>
           <td>
@@ -62,6 +84,7 @@
 
     </tbody>
   </table>
+  <!-- Table End-->
 </body>
 
 </html>
