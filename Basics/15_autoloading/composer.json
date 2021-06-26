@@ -1,0 +1,17 @@
+{
+    "name": "mauro/15_autoloading",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./app"
+        }
+    },
+    "authors": [
+        {
+            "name": "mauro bono",
+            "email": "bono.mauro@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.3"
+    }
+}
