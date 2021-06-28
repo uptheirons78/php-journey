@@ -1,3 +1,15 @@
+<?php
+session_start();
+$_SESSION['session_counter'] = $_SESSION['session_counter'] ?? 0;
+$_SESSION['session_counter']++;
+$pageCounter = $_SESSION['session_counter'] ?? 0;
+
+if ($_SESSION['session_counter'] === 10) {
+    echo 'Thanks for visiting us ten times';
+    session_unset();
+    session_destroy();
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,6 +20,6 @@
     <title>Document</title>
 </head>
 <body>
-<h1>My Awesome page></h1>
+<h1>My Awesome page, you visited <?php echo $pageCounter ?> times</h1>
 </body>
 </html>
